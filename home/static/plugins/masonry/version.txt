@@ -1,0 +1,3 @@
+masonry.desandro.com
+https://github.com/desandro/masonry
+4.2.0

@@ -1,0 +1,33 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+<div class="card my-5 border-0">
+    <img class="card-img-top img-fluid w-75 mx-auto shadow-lg p-3 mb-1 bg-white rounded blog-picture" src="{{blog.picture_url}}" alt="">
+    <div class="card-body">
+        <h1 class="card-text text-center">{{blog.title}}</h1>
+        <p class="text-muted text-center small">{{blog.date_written|date:"F d,  Y"}}</p>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <p class="card-text text-justify" style="font-size: 1.3rem">{{blog.content}}</p>
+            </div>
+            <div class="col-md-4">
+                <div class="media">
+                    <span class="align-self-center">
+                        <i class="fas fa-share-alt"></i>
+                        SHARE:
+                    </span>
+                    <div class="media-body">
+                        <a class="pr-1" href="#"><i class="fab fa-facebook-square fa-2x fa-fw"></i></a>
+                        <a class="pr-1" href="#"><i class="fab fa-twitter-square fa-2x fa-fw"></i></a>
+                        <a class="pr-1" href="#"><i class="fab fa-youtube fa-2x fa-fw"></i></a>
+                        <a class="pr-1" href="#"><i class="fab fa-instagram fa-2x fa-fw"></i></a>
+                        <a class="pr-1" href="#"><i class="fab fa-pinterest-square fa-2x fa-fw"></i></a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

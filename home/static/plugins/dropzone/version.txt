@@ -1,0 +1,3 @@
+dropzonejs.com
+https://gitlab.com/meno/dropzone
+5.5.0

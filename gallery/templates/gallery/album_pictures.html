@@ -1,0 +1,62 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+<div class="pt-3">
+    <nav>
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item"><a href="/gallery/">ALL</a></li>
+            <li class="breadcrumb-item"><a href="/gallery/albums/">ALBUMS</a></li>
+            <li class="ml-auto">
+                <button class="btn btn-primary" type="button" name="button">
+                    <i class="fas fa-camera"></i>
+                    Upload Photo
+                </button>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+    <div class="row">
+    {% for picture in pictures %}
+        <div class="col-md-4 text-center">
+            <a class="thumb" href="javascript:void(0)" data-src="{{picture.picture_url}}" data-caption="{{picture.caption}}">
+                <img class="img-fluid shadow p-3 bg-white rounded" src="{{picture.picture_url}}" alt="">
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="modal fade" id="modal-picture" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="media">
+                        <a class="align-self-center mr-3" href="">
+                            <i class="fas fa-chevron-left fa-2x"></i>
+                        </a>
+                        <div class="media-body">
+                            <img id="modal-picture-img" class="img-fluid w-100" src="" alt="">
+                        </div>
+                        <a class="align-self-center ml-3" href="">
+                            <i class="fas fa-chevron-right fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p id="modal-picture-caption" class="card-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $(function() {
+            $('.thumb').on('click', function() {
+                $('#modal-picture-img').attr('src', $(this).data('src'));
+                $('#modal-picture-caption').attr('src', $(this).data('caption'));
+                $('#modal-picture').modal('show');
+            });
+        });
+    </script>
+{% endblock %}

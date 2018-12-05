@@ -1,0 +1,111 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+    <div class="py-4">
+        <div class="row">
+            <nav class="navbar navbar-expand">
+                <div class="navbar-nav">
+                    <a class="nav-item pr-2" href="#">ALL</a>
+                    <a class="nav-item pr-2" href="#">DESTINATION</a>
+                </div>
+                <form class="form-inline" action="index.html" method="post">
+                    <input class="form-control rounded-0" type="search" placeholder="Search">
+                    <button class="btn btn-outline-primary rounded-0">SEARCH</button>
+                </form>
+            </nav>
+            <!--for the news-->
+            <div class="col-lg-9 py-2">
+                {% for blog in blogs %}
+                    <div class="card mb-4">
+                        <a href="{% url 'blog:detail' blog.seo_url %}">
+                            <img class="card-img" src="{{blog.picture_url}}" alt="">
+                        </a>
+                        <div class="card-img-overlay text-center" style="width: 40%; height: 100%; background-color: rgba(255,255,255, 0.7)">
+                            <div class="border border-primary p-3 h-100 d-flex align-items-center">
+                                <div>
+                                    <h5 class="blog-title mb-4"><a href="#">{{blog.title}}</a></h5>
+                                    <p class="card-text">{{blog.short_description}}</p>
+                                    <a class="btn btn-outline-primary" href="{% url 'blog:detail' blog.seo_url %}">READ MORE</a>
+                                </div>
+                            </div>
+                            <div class="bg-warning position-absolute px-2 rounded" style="right: -37px; top: 0;">
+                                <h3 class="mb-0">{{blog.date_written|date:"d"}}</h5>
+                                <h6 class="text-uppercase">{{blog.date_written|date:"M"}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <!--for the videos-->
+            <div class="col-lg-3">
+                <div class="add-blog text-center">
+                    <a class="btn btn-primary" href="{% url 'blog:submit' %}">
+                        <i class="far fa-edit"></i>
+                        WRITE YOUR BLOG
+                    </a>
+                </div>
+                <div class="text-center mt-5">
+                    <h5 class="mb-3 section-line about font-weight-bold"><span class="section-title">ABOUT</span></h5>
+                    <img class="w-50 rounded py-3" src="/static/images/shyne.jpg" alt="">
+                    <h5>{{about.title}}</h5>
+                    <p>{{about.about_me}}</p>
+                </div>
+
+                <div class="sns-sites pt-3">
+                    <h5 class="mb-3 section-line font-weight-bold"><span class="section-title">SNS SITES</span></h5>
+                    <div class="card">
+                        <ul class="list-group list-group-flush p-0">
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <i class="fab fa-facebook-f fa-fw fa-2x mr-3" style="color: #3b5998"></i>
+                                    <div class="media-body">
+                                        <h6 class="mb-0 font-weight-bold">Facebook</h6>
+                                        <a class="p-0" href="#">myFacebookLink</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <i class="fab fa-twitter fa-fw fa-2x mr-3" style="color: #1da1f2"></i>
+                                    <div class="media-body">
+                                        <h6 class="mb-0 font-weight-bold">Twitter</h6>
+                                        <a class="p-0" href="#">TwitterLink</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <i class="fab fa-youtube fa-fw fa-2x mr-3" style="color: #ff0000"></i>
+                                    <div class="media-body">
+                                        <h6 class="mb-0 font-weight-bold">Youtube</h6>
+                                        <a class="p-0" href="#">myYoutubeLink</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <i class="fab fa-instagram fa-fw fa-2x mr-3" style="color: #c13584"></i>
+                                    <div class="media-body">
+                                        <h6 class="mb-0 font-weight-bold">Instagram</h6>
+                                        <a class="p-0" href="#">myInstagramLink</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <i class="fab fa-pinterest fa-fw fa-2x mr-3" style="color: #bd081c"></i>
+                                    <div class="media-body">
+                                        <h6 class="mb-0 font-weight-bold">Pinterest</h6>
+                                        <a class="p-0" href="#">myPinterestLink</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

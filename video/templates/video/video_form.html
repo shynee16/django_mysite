@@ -1,0 +1,51 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="card my-5">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form action="{% url 'video:upload' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group text-center">
+                            <img id="thumb-preview" class="img-thumbnail img-fluid w-50" src="/static/images/paris.jpg" alt="">
+                        </div>
+                        <div class="custom-file text-truncate">
+                            <input type="file" class="custom-file-input" id="thumb-input" name="thumb" accept="image/*">
+                            <label class="custom-file-label" for="cover-input" style="justify-content: left;">Choose thumb image</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-title">Title</label>
+                            <input class="form-control" id="form-title" type="text" name="title" placeholder="Enter title">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-destination">Destination</label>
+                            <input class="form-control" id="form-destination" type="text" name="destination" placeholder="Enter destination">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-video-url">Video URL</label>
+                            <input class="form-control" id="form-video-url" type="text" name="video_url" placeholder="Enter video URL">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-embed-url">Embed URL</label>
+                            <input class="form-control" id="form-embed-url" type="text" name="embed_url" placeholder="Enter embed URL">
+                        </div>
+                        <button type="submit" class="btn btn-primary rounded-0 float-right">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $(function() {
+            $('#thumb-input').on('change', function() {
+                file_preview = URL.createObjectURL($(this).prop('files')[0]);
+                file_name = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').addClass("selected").html(file_name);
+                $('#thumb-preview').attr('src', file_preview);
+            });
+        });
+    </script>
+{% endblock %}

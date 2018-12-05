@@ -1,0 +1,3 @@
+https://github.com/eisbehr-/jquery.lazy
+jquery.eisbehr.de/lazy/
+v1.7.7

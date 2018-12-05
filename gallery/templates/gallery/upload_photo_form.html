@@ -1,0 +1,95 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="card my-5">
+        <div class="card-header">
+            Upload pictures {{count}}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="select-album">Select album</label>
+                        </div>
+                        <select class="custom-select" id="select-album">
+                            {% for album in albums %}
+                            <option value="{{album.id}}" >{{album}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group text-center mb-1">
+                        <img class="img-thumbnail img-fluid w-75" src="/media/{{selected_album.cover_url}}" alt="">
+                    </div>
+                    <div class="form-group">
+                        <h4>{{selected_album.name}}</h4>
+                        <small>{{selected_album.caption}}</small>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col text-right">
+                            <label class="btn btn-secondary">
+                                Upload photos <input id="input-pictures" type="file" name="picture" hidden accept="image/*" multiple>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                    {% for picture in pictures %}
+                        <div class="col-md-4 text-center">
+                            <a class="thumb" href="javascript:void(0)" data-src="/media/{{picture.picture_url}}" data-caption="{{picture.caption}}">
+                                <img class="img-fluid shadow p-3 bg-white rounded" src="/media/{{picture.picture_url}}" alt="">
+                            </a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-upload" class="modal" tabindex="-1" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                <form id="form-upload" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="album" value="{{selected_album.pk}}">
+                    <div id="row-previews" class="row">
+
+                    </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="clone-preview" class="d-none">
+        <div class="col-md-4">
+            <img class="img-thumbnail img-fluid mb-3" src="" alt="">
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $(function() {
+            $('#select-album').on('change', function() {
+                location.href = '/gallery/album/upload/'+$(this).val();
+            });
+            $('#input-pictures').on('change', function() {
+                $.each($(this).prop('files'), function(index, value) {
+                    file_preview = URL.createObjectURL(value);
+
+                    $('#clone-preview .img-thumbnail').attr('src', file_preview);
+                    $('#row-previews').append($('#clone-preview').html());
+                });
+                $('.row-previews').find('.clone-preview:first').remove();
+                $('#form-upload').append($(this));
+                $('#modal-upload').modal('show');
+            });
+        });
+    </script>
+{% endblock %}

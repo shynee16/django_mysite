@@ -1,0 +1,30 @@
+nav {font-family: 'Architects Daughter', cursive; color: #343a40!important}
+ul li a.nav-link {font-weight:bold;}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link {color: #343a40;}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {color: #4e89b9;}
+.twitter:hover {color: #1da1f2!important;}
+.facebook:hover {color: #3b5998!important;}
+.youtube:hover {color: #ff0000!important;}
+.instagram:hover {color: #e1306c!important;}
+.pinterest:hover {color: #bd081c!important;}
+
+.about, .add-blog,.sns-sites {font-family: 'Architects Daughter', cursive;}
+.breadcrumb {background-color: #fff;}
+
+.blog-title {font-family: 'Rancho', cursive; font-size: 1.5rem;}
+.home-blog-title {font-family: 'Merienda', cursive;}
+.home-blog-link {color: #343a40;}
+.home-blog-link:hover {color: #4e89b9; text-decoration: none;}
+
+.album-name {font-family: 'Merienda', cursive; color: #343a40;}
+.album-name:hover {color: #4e89b9; text-decoration: none; font-weight: bold;}
+
+.section-line { width:100%; text-align:center; border-bottom: 2px solid #ffc107; line-height:0.1em; margin:10px 0 20px; font-family: 'Rancho', cursive; font-size: 1.5rem; }
+.section-title {background:#fff; padding:0 10px; color: #6b9bc5;}
+.border-warning-2px {border: 2px solid #ffc107 !important;}
+
+.album-border {outline: 1px solid white; outline-offset: -1rem;}
+
+.upload-photo{float: right;}
+
+.nav-link-footer { font-family: 'Architects Daughter', cursive; color: #343a40;}

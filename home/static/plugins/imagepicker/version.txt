@@ -1,0 +1,3 @@
+rvera.github.com/image-picker
+https://github.com/rvera/image-picker
+0.3.1

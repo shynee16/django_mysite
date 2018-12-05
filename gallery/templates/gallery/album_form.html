@@ -1,0 +1,44 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="card my-5">
+        <div class="card-header">
+            Create New Album
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="" action="{% url 'gallery:add_album' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group text-center mb-1">
+                            <img id="cover-preview" class="img-thumbnail img-fluid w-75" src="/static/images/paris.jpg" alt="">
+                        </div>
+                        <div class="custom-file text-truncate">
+                            <input type="file" class="custom-file-input" id="cover-input" name="cover" accept="image/*">
+                            <label class="custom-file-label" for="cover-input" style="justify-content: left;">Choose cover image</label>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control form-control-sm rounded-0" id="form-title" type="text" name="name" placeholder="Enter album name">
+                            <textarea class="form-control form-control-sm rounded-0" name="caption" rows="2"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-sm rounded-0 float-right">Submit</button>
+                        <a class="btn btn-danger btn-sm rounded-0 float-right mr-1" href="javascript:history.back()">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $(function() {
+            $('#cover-input').on('change', function() {
+                file_preview = URL.createObjectURL($(this).prop('files')[0]);
+                file_name = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').addClass("selected").html(file_name);
+                $('#cover-preview').attr('src', file_preview);
+            });
+        });
+    </script>
+{% endblock %}

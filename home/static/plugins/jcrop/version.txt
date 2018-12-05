@@ -1,0 +1,3 @@
+deepliquid.com/content/Jcrop.html
+https://github.com/tapmodo/Jcrop
+0.9.12

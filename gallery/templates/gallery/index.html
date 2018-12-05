@@ -1,0 +1,32 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+<div class="pt-3">
+    <nav>
+        <ol class="breadcrumb px-0">
+            <li class="breadcrumb-item"><a href="/gallery/">ALL</a></li>
+            <li class="breadcrumb-item"><a href="/gallery/albums/">ALBUMS</a></li>
+            <li class="ml-auto">
+                <a class="btn btn-warning" href="{% url 'gallery:add_album' %}">
+                    <i class="fas fa-image"></i>
+                    Add Album
+                </a>
+                <a class="btn btn-warning" href="{% url 'gallery:upload_photo' 0 %}">
+                    <i class="fas fa-camera"></i>
+                    Upload Photo
+                </a>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div class="row">
+    {% for picture in pictures %}
+    <div class="col-md-4 text-center">
+        <a href="">
+            <img class="img-fluid shadow p-3 mb-1 bg-white rounded" src="/media/{{picture.picture_url}}" alt="">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

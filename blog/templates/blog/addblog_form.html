@@ -1,0 +1,78 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8 border p-3 rounded">
+            <form class="" action="{% url 'blog:submit' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group text-center">
+                    <img id="img-preview" class="img-thumbnail img-fluid w-50" src="/static/images/paris.jpg" alt="">
+                </div>
+                <div class="form-group">
+                    <label>Cover: </label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="form-cover">
+                        <label class="custom-file-label" for="form-cover">Choose image</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="form-title">Title: </label>
+                    <input class="form-control" id="form-title" type="text" name="title" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                    <label for="form-slug">Slug: </label>
+                    <input class="form-control form-control-sm" id="form-slug" type="text" name="seo_url" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="form-destination">Destination: </label>
+                    <input class="form-control" id="form-destination" type="text" name="destination" placeholder="Enter Destination">
+                </div>
+                <div class="form-group">
+                    <label for="form-picture_url">Picture URL: </label>
+                    <input class="form-control" id="form-picture_url" type="text" name="picture_url" placeholder="Enter Picture URL">
+                </div>
+                <div class="form-group">
+                    <label for="form-short_description">Short Description: </label>
+                    <textarea class="form-control" name="short_description" rows="3" cols="50"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="form-content">Content: </label>
+                    <textarea class="form-control" name="content" rows="8" cols="80"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary rounded-0 float-right">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $('#form-cover').on('change', function() {
+            file_preview = URL.createObjectURL($(this).prop('files')[0]);
+            file_name = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(file_name);
+            $('#img-preview').attr('src', file_preview);
+        });
+
+        $('#form-title').on('input', function() {
+            $('#form-slug').val(string_to_slug($(this).val()));
+        });
+
+        function string_to_slug(str) {
+            str = str.replace(/^\s+|\s+$/g, ""); // trim
+            str = str.toLowerCase();
+            // remove accents, swap ñ for n, etc
+            var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+            var to = "aaaaaaeeeeiiiioooouuuunc------";
+            for (var i = 0, l = from.length; i < l; i++) {
+                str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+            }
+            str = str
+                .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+                .replace(/\s+/g, "-") // collapse whitespace and replace by -
+                .replace(/-+/g, "-") // collapse dashes
+                .replace(/^-+/, "") // trim - from start of text
+                .replace(/-+$/, ""); // trim - from end of text
+            return str;
+        }
+    </script>
+{% endblock %}

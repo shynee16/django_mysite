@@ -1,0 +1,73 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <section class="py-5">
+        <div class="row">
+            <div class="col-md-3 offset-md-2">
+                <img class="img-fluid rounded-circle shadow shadow-lg" src="/static/images/withbaby.jpg" alt="">
+            </div>
+            <div class="col-md-5 text-center my-auto">
+                <h5>{{about.title}}</h5>
+                <p>{{about.about_me}}</p>
+                <p>{{about.description}}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <h5 class="section-line"><span class="section-title p-3 border border-warning-2px">LATEST BLOGS</span></h5>
+            <div class="row">
+                {% for blog in blogs %}
+                    <div class="col-md-6 pt-4">
+                        <div class="border p-1">
+                            <div class="row">
+                                <div class="col-2 pr-0">
+                                    <div class="bg-warning h-100 d-flex align-items-center justify-content-center text-center">
+                                        <div class="d-flex flex-column">
+                                            <h3 class="mb-0">{{blog.date_written|date:"d"}}</h5>
+                                            <h6 class="text-uppercase">{{blog.date_written|date:"M"}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 pr-1 pl-1">
+                                    <img class="img-fluid" src="{{blog.picture_url}}" alt="">
+                                </div>
+                                <div class="col-6 pl-1 my-auto">
+                                    <h5 class="mb-1 home-blog-title"><a class="home-blog-link" href="{% url 'blog:detail' blog.seo_url %}">{{blog.title}}</a></h5>
+                                    <p class="small text-muted text-uppercase mb-0"><a href="#">{{blog.destination}}</a> / </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </section>
+
+    <section class="py-5">
+        <h5 class="section-line"><span class="section-title p-3 border border-warning-2px">WATCH MY LATEST JOURNEY</span></h5>
+        <div class="row pt-5">
+            {% for video in videos %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="embed-responsive embed-responsive-4by3 rounded">
+                        <iframe class="embed-responsive-item" src="{{video.embed_url}}"></iframe>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="py-5">
+        <h5 class="section-line"><span class="section-title p-3 border border-warning-2px">CHECK OUT MY PICTURES!</span></h5>
+        <div class="row pt-5">
+            {% for album in albums %}
+                <div class="col-md-6 col-lg-4 text-center">
+                    <img class="img-fluid album-border" src="{{album.cover_url}}" alt="">
+                    <p class="mt-2"><a class="album-name" href="#">{{album.name}}</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+
+{% endblock %}
